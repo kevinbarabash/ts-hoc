@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { withFoo, withFooBar } from "./index";
-import type { WithFooProps } from "./index";
+import { withFoo, withFooBar } from "./hoc";
+import type { WithFooProps } from "./hoc";
 
 type Props = WithFooProps & { name: string; greeting?: string };
 
@@ -21,11 +21,11 @@ const MyApp: React.FC<{}> = () => {
   return (
     <div>
       <MyComponent foo="" greeting="hello" name="world" />
-      <MyComponent foo="" name="world" />
+      <MyComponent foo="" bad="bad" name="world" />
       <MyFooBarComponent greeting="hello" name="world" />
-      <MyFooBarComponent name="world" />
+      <MyFooBarComponent bad="bad" name="world" />
       <MyFooComponent greeting="hello" name="world" />
-      <MyFooComponent name="world" />
+      <MyFooComponent bad="bad" name="world" />
     </div>
   );
 };
