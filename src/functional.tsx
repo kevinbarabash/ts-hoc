@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { WithFoo, WithFooBar, WithBaz, useFoo, useBaz } from "./hoc";
-import type { WithFooProps, WithBazProps } from "./hoc";
+import { WithFoo, WithFooBar, WithBaz, useFoo, useBaz } from "./function-as-children";
+import type { WithFooProps, WithBazProps } from "./function-as-children";
 
 type PublicProps = { name: string; greeting?: string };
 type Props = WithFooProps & PublicProps;

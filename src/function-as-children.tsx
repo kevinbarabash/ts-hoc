@@ -1,8 +1,9 @@
 /**
- * NOTE: These are actually HOCs.  We're going back to the "function-as-children"
- * pattern.  The reason for this is that it's easier to get default props and refs
- * working correctly using this pattern.  We are still injecting props like an HOC
- * would be though by creating wrappers around the components that we're inject the
+ * We're going back to the "function-as-children" pattern.
+ * 
+ * The reason for this is that it's easier to get default props and refs working 
+ * correctly using this pattern.  We are still injecting props like an HOC would 
+ * be though by creating wrappers around the components that we're inject the
  * props into.  See class.tsx and functional.tsx for examples.
  * 
  * This pattern is also more flexible than traditional HOCs because we can rename
