@@ -49,15 +49,15 @@ const MyApp: React.FC<{}> = () => {
       <MyComponent foo="" greeting="hello" name="world" />
       <MyComponent foo="" name="world" />
       <MyComponent foo="" name="world" ref={ref} />
-      <MyComponent foo="" bad="bad" name="world" />
+      <MyComponent foo="" bad="bad" name="world" /> {/* error on 'bad="bad"' */}
       <MyFooBarComponent greeting="hello" name="world" />
       <MyFooBarComponent name="world" />
       <MyFooBarComponent name="world" ref={ref} />
-      <MyFooBarComponent bad="bad" name="world" />
+      <MyFooBarComponent bad="bad" name="world" /> {/* error on 'bad="bad"' */}
       <MyFooComponent greeting="hello" name="world" />
       <MyFooComponent name="world" />
       <MyFooComponent name="world" ref={ref} />
-      <MyFooComponent bad="bad" name="world" />
+      <MyFooComponent bad="bad" name="world" /> {/* error on 'bad="bad"' */}
     </div>
   );
 };
@@ -106,15 +106,15 @@ const MyMegaApp: React.FC<{}> = () => {
       <MyMegaComponent foo="" baz={0} greeting="hello" name="world" />
       <MyMegaComponent foo="" baz={0} name="world" />
       <MyMegaComponent foo="" baz={0} name="world" ref={ref} />
-      <MyMegaComponent foo="" baz={0} bad="bad" name="world" />
+      <MyMegaComponent foo="" baz={0} bad="bad" name="world" /> {/* error on 'bad="bad"' */}
       <HookAndFAC greeting="hello" name="world" />
       <HookAndFAC name="world" />
       <HookAndFAC name="world" ref={ref} />
-      <HookAndFAC bad="bad" name="world" />
+      <HookAndFAC bad="bad" name="world" /> {/* error on 'bad="bad"' */}
       <HookOnly greeting="hello" name="world" />
       <HookOnly name="world" />
       <HookOnly name="world" ref={ref} />
-      <HookOnly bad="bad" name="world" />
+      <HookOnly bad="bad" name="world" /> {/* error on 'bad="bad"' */}
     </div>
   );
 };
