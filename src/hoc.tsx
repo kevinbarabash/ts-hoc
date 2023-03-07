@@ -1,45 +1,36 @@
+/**
+ * NOTE: These are actually HOCs.  We're going back to the "function-as-children"
+ * pattern.  The reason for this is that it's easier to get default props and refs
+ * working correctly using this pattern.  We are still injecting props like an HOC
+ * would be though by creating wrappers around the components that we're inject the
+ * props into.  See class.tsx and functional.tsx for examples.
+ * 
+ * This pattern is also more flexible than traditional HOCs because we can rename
+ * props before injecting them into the component being wrapped.  This would allow
+ * a component to use multiple feature flags without having to transition to hooks.
+ */
 import * as React from "react";
 
 export type WithFooProps = {
   foo: string;
 };
 
-export function withFooBar<T extends WithFooProps = WithFooProps>(
-  WrappedComponent: React.ComponentType<T>
-) {
-  // Creating the inner component. The calculated Props type here is the where the magic happens.
-  const ComponentWithFooBar = React.forwardRef((props: Omit<T, keyof WithFooProps>, ref) => {
-    const foo = "bar";
+// Helper type so that all of the children functions look the same.
+type Children<InjectedProps> = {
+  children: (injectedProps: InjectedProps) => React.ReactElement
+};
 
-    // Props comes afterwards so the can override the default ones.
-    return <WrappedComponent {...(props as T)} foo={foo} ref={ref} />;
-  });
+// FAC component that's curried to allow customization
+export const WithFoo = (foo: string) => 
+  ({children}: Children<WithFooProps>) => children({foo});
 
-  // Set the display name of the wrapper to something nice
-  const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || "Component";
-    ComponentWithFooBar.displayName = `withFooBar(${displayName})`;
+export const WithFooBar = WithFoo("bar");
 
-  return ComponentWithFooBar;
-}
+export type WithBazProps = {
+  baz: number;
+};
 
-export function withFoo(option: string) {
-  return function<T extends WithFooProps = WithFooProps>(
-    WrappedComponent: React.ComponentType<T>
-  ) {
-    // Creating the inner component. The calculated Props type here is the where the magic happens.
-    const ComponentWithFooBar = React.forwardRef((props: Omit<T, keyof WithFooProps>, ref) => {
-      const foo = "bar";
-  
-      // Props comes afterwards so the can override the default ones.
-      return <WrappedComponent {...(props as T)} foo={foo} ref={ref} />;
-    });
-  
-    // Set the display name of the wrapper to something nice
-    const displayName =
-      WrappedComponent.displayName || WrappedComponent.name || "Component";
-      ComponentWithFooBar.displayName = `withFooBar(${displayName})`;
-  
-    return ComponentWithFooBar;
-  };
-}
+export const WithBaz = ({children}: Children<WithBazProps>) => children({baz: 42});
+
+export const useBaz = () => React.useMemo(() => 42, []);
+export const useFoo = (foo: string) => React.useMemo(() => foo, [foo]);
