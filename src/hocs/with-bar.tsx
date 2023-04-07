@@ -17,11 +17,11 @@ export function withBar<
     WrappedComponent.displayName || WrappedComponent.name || "Component";
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
-  const ComponentWithFoo = (props: OuterProps) => {
+  const ComponentWithBar = (props: OuterProps) => {
     return <WrappedComponent {...(props as any)} bar={5} />;
   };
 
-  ComponentWithFoo.displayName = `withFoo(${displayName})`;
+  ComponentWithBar.displayName = `withBar(${displayName})`;
 
-  return ComponentWithFoo;
+  return ComponentWithBar;
 }
