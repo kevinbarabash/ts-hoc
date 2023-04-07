@@ -8,12 +8,12 @@ type Props = {
     qux?: string,
 } & WithFooProps & WithBarProps;
 
-const InternalComponent = (props: Props) => {
+const InternalComponent = ({foo, bar, baz, qux = "hello"}: Props) => {
     return <div>
-        foo: {props.foo}
-        bar: {props.bar}
-        baz: {props.baz}  
-        {props.qux ? `qux: ${props.qux}` : null}    
+        foo: {foo}
+        bar: {bar}
+        baz: {baz}  
+        qux: {qux}   
     </div>
 }
 
