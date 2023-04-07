@@ -2,16 +2,20 @@ export type WithFoo = {
   foo: string;
 };
 
-export function withFoo<T extends WithFoo = WithFoo>(
-  WrappedComponent: React.ComponentType<T>
+export function withFoo<
+  C extends React.JSXElementConstructor<React.ComponentProps<C> & WithFoo>
+>(
+  WrappedComponent: C
 ) {
+  type InnerProps = JSX.LibraryManagedAttributes<C, React.ComponentProps<C>>;
+  type OuterProps = Omit<InnerProps, keyof WithFoo>;
+
   // Try to create a nice displayName for React Dev Tools.
-  const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || "Component";
+  const displayName = WrappedComponent.name || "Component";
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
-  const ComponentWithFoo = (props: Omit<T, keyof WithFoo>) => {
-    return <WrappedComponent {...(props as T)} foo="foo" />;
+  const ComponentWithFoo = (props: OuterProps) => {
+    return <WrappedComponent {...(props as any)} foo="foo" />;
   };
 
   ComponentWithFoo.displayName = `withFoo(${displayName})`;
