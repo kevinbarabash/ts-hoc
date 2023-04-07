@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { withFoo, WithFoo } from "./with-foo";
-import { withBar, WithBar } from "./with-bar";
+import { withFoo, WithFooProps } from "./with-foo";
+import { withBar, WithBarProps } from "./with-bar";
 
 type Props = {
     baz: boolean,
     qux?: string,
-} & WithFoo & WithBar;
+} & WithFooProps & WithBarProps;
 
 const InternalComponent = (props: Props) => {
     return <div>

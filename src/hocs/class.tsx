@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { withFoo, WithFoo } from "./with-foo";
-import { withBar, WithBar } from "./with-bar";
+import { withFoo, WithFooProps } from "./with-foo";
+import { withBar, WithBarProps } from "./with-bar";
 
 type Props = {
     baz: boolean,
     qux?: string,
-} & WithFoo & WithBar & typeof InternalComponent.defaultProps;
+} & WithFooProps & WithBarProps & typeof InternalComponent.defaultProps;
 
 class InternalComponent extends React.Component<Props> {
     static defaultProps = {
