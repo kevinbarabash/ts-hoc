@@ -30,8 +30,6 @@ class InternalComponent extends React.Component<Props> {
   }
 }
 
-InternalComponent.defaultProps.qux
-
 type ExportProps = WithoutFoo<
   WithoutBar<
     JSX.LibraryManagedAttributes<
