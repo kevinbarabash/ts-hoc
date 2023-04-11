@@ -5,12 +5,16 @@ import { withBar, WithBarProps, WithoutBar } from "./with-bar";
 
 type Props = {
   baz: boolean;
-  qux?: string;
+  qux: string;
 } & WithFooProps &
   WithBarProps;
 
+type DefaultProps = {
+  qux: Props["qux"];
+}
+
 class InternalComponent extends React.Component<Props> {
-  static defaultProps = {
+  static defaultProps: DefaultProps = {
     qux: "hello",
   };
 
@@ -20,11 +24,13 @@ class InternalComponent extends React.Component<Props> {
         foo: {this.props.foo}
         bar: {this.props.bar}
         baz: {this.props.baz}
-        {this.props.qux ? `qux: ${this.props.qux}` : null}
+        qux: {this.props.qux}
       </div>
     );
   }
 }
+
+InternalComponent.defaultProps.qux
 
 type ExportProps = WithoutFoo<
   WithoutBar<
