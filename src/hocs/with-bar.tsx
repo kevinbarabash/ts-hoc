@@ -2,10 +2,12 @@ export type WithBarProps = {
   bar: number;
 };
 
+export type WithoutBar<T> = Omit<T, keyof WithBarProps>;
+
 export function withBar<
-  C extends React.JSXElementConstructor<
-    React.ComponentProps<C> & WithBarProps
-  > & { displayName?: string | undefined }
+  C extends React.ComponentType<React.ComponentProps<C> & WithBarProps> & {
+    displayName?: string | undefined;
+  }
 >(WrappedComponent: C) {
   type OuterProps = Omit<
     JSX.LibraryManagedAttributes<C, React.ComponentProps<C>>,

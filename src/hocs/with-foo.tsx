@@ -2,10 +2,12 @@ export type WithFooProps = {
   foo: string;
 };
 
+export type WithoutFoo<T> = Omit<T, keyof WithFooProps>;
+
 export function withFoo<
-  C extends React.JSXElementConstructor<
-    React.ComponentProps<C> & WithFooProps
-  > & { displayName?: string | undefined }
+  C extends React.ComponentType<React.ComponentProps<C> & WithFooProps> & {
+    displayName?: string | undefined;
+  }
 >(WrappedComponent: C) {
   type OuterProps = Omit<
     JSX.LibraryManagedAttributes<C, React.ComponentProps<C>>,
